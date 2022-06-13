@@ -1,7 +1,6 @@
 package com.redbase23.noteself
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -28,19 +27,6 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
             val dialog = DialogNewNote()
             dialog.show(supportFragmentManager, "")
-        }
-
-        // Temporary code
-        val button = findViewById<View>(R.id.button) as Button
-        button.setOnClickListener {
-            // Create a new DialogShowNote called dialog
-            val dialog = DialogShowNote()
-
-            // Send the note via the sendNoteSelected method
-            dialog.sendNoteSelected(tempNote)
-
-            // Create the dialog
-            dialog.show(supportFragmentManager, "123")
         }
 
     }
