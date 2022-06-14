@@ -1,5 +1,6 @@
 package com.redbase23.noteself
 
+import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -11,22 +12,45 @@ class NoteAdapter(
 ) : RecyclerView.Adapter<NoteAdapter.ListItemHolder>() {
 
     inner class ListItemHolder(view:View):RecyclerView.ViewHolder(view), View.OnClickListener{
-        override fun onClick(p0: View?) {
-            TODO("Not yet implemented")
+
+        internal var title = view.findViewById<View>(R.id.textViewTitle) as TextView
+        internal var description =view.findViewById<View>(R.id.textViewDescription) as TextView
+        internal var status = view.findViewById<View>(R.id.textViewStatus) as TextView
+
+        init{
+            view.isClickable = true
+            view.setOnClickListener(this)
+        }
+
+        override fun onClick(view: View?) {
+            mainActivity.showNote(adapterPosition)
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.listitem,parent,false)
+        return  ListItemHolder(itemView)
+    }
+
+    override fun onBindViewHolder(holder: ListItemHolder, position: Int) {
+        val note = noteList[position]
+
+        holder.title.text = note.title
+        holder.description.text=note.description!!.substring(0,15) // !!! This causes an error!
+
+        when{
+            note.idea -> holder.status.text=mainActivity.resources.getString(R.string.idea_text)
+            note.important -> holder.status.text=mainActivity.resources.getString(R.string.important_text)
+            note.todo ->holder.status.text=mainActivity.resources.getString(R.string.todo_text)
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemHolder {
-        TODO("Not yet implemented")
-    }
-
-    override fun onBindViewHolder(holder: ListItemHolder, position: Int) {
-        TODO("Not yet implemented")
-    }
-
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        if (noteList!=null){
+            return noteList.size
+        }
+        //error
+        return  -1
     }
-
 }

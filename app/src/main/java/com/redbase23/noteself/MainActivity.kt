@@ -6,29 +6,37 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    // Temporary code
-    private var tempNote = Note()
-
-    var note1 = Note()
-    var note2 = Note()
-    var note3 = Note()
-    // 96 more lines like the above
-    var note100 = Note()
+    private val noteList =ArrayList<Note>()
+    private var recyclerView:RecyclerView?=null
+    private var adapter:NoteAdapter?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener {view ->
             val dialog = DialogNewNote()
             dialog.show(supportFragmentManager, "")
         }
 
+        recyclerView=findViewById<View>(R.id.recyclerView) as RecyclerView
+        adapter= NoteAdapter(this,noteList)
+
+        val layoutManager = LinearLayoutManager(applicationContext)
+        recyclerView!!.layoutManager=layoutManager
+        recyclerView!!.itemAnimator=DefaultItemAnimator()
+        recyclerView!!.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
+
+        recyclerView!!.adapter=adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -43,9 +51,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     fun createNewNote(n: Note) {
-        // Temporary code
-        tempNote = n
+        noteList.add(n)
+        adapter!!.notifyDataSetChanged()
+    }
+
+    fun showNote(noteToShow: Int){
+        val dialog = DialogShowNote()
+        dialog.sendNoteSelected(noteList[noteToShow])
+        dialog.show(supportFragmentManager,"")
     }
 }
