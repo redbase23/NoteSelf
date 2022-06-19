@@ -17,9 +17,9 @@ class DialogShowNote : DialogFragment() {
         // All the other code goes here
 
         // All the other code goes here
-        val builder = AlertDialog.Builder(this.activity!!)
+        val builder = AlertDialog.Builder(this.requireActivity())
 
-        val inflater = activity!!.layoutInflater
+        val inflater = requireActivity().layoutInflater
 
         val dialogView = inflater.inflate(R.layout.dialog_show_note, null)
 
@@ -50,13 +50,14 @@ class DialogShowNote : DialogFragment() {
 
         val btnOK = dialogView.findViewById(R.id.btnOK) as Button
 
-        builder.setView(dialogView).setMessage("Your Note")
+        builder.setView(dialogView).setMessage(getString(R.string.your_note))
 
         btnOK.setOnClickListener({
             dismiss()
         })
 
         return builder.create()
+
 
 
     }

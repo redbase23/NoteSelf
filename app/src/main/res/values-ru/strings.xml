@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">Установки</string>
+    <string name="action_add">добавить</string>
+    <string name="title_hint">Титул</string>
+    <string name="title">Титул</string>
+    <string name="description_hint">Описание</string>
+    <string name="description">Описание</string>
+    <string name="idea_text">Идея</string>
+    <string name="important_text">Важно</string>
+    <string name="todo_text">Сделать</string>
+    <string name="cancel_button">Отмена</string>
+    <string name="ok_button">ОК</string>
+    <string name="settings_title">Установки</string>
+    <string name="divider">Разделитель</string>
+    <string name="show_note">Показать запись</string>
+    <string name="status">Запись #%1$s</string>
+    <string name="add_new_note">Добавить новую запись</string>
+    <string name="your_note">Ваша запись</string>
+</resources>

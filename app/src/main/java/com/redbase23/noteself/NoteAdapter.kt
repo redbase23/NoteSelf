@@ -38,6 +38,9 @@ class NoteAdapter(
         holder.title.text = note.title
         holder.description.text=note.description!!.substring(0,15) // !!! This causes an error!
 
+        val positionNote =(position+1).toString()
+        holder.status.text= String.format(mainActivity.resources.getString(R.string.status,positionNote))
+
         when{
             note.idea -> holder.status.text=mainActivity.resources.getString(R.string.idea_text)
             note.important -> holder.status.text=mainActivity.resources.getString(R.string.important_text)
